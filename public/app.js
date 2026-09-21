@@ -1,22 +1,8 @@
 "use strict";
 
-// function loadProducts() {
-//     fetch('/products').then(response => response.json())
+const errorBox = document.querySelector('#error');
+const list = document.querySelector('#list');
 
-//         .then(data => {
-//             const productsList = document.querySelector('#products-list');
-//             productsList.innerHTML = '';    
-//             products = data.products;
-//             data.products.forEach(product => {
-//                 const productItem = document.createElement('li');
-//                 productItem.textContent = `${product.title} - $${product.price}`;
-//                 productsList.appendChild(productItem);
-//             });
-//         })
-//         .catch(error => {
-//             console.error('Error fetching products:', error);
-//         });
-//     }
 
 async function loadProducts() {
 
@@ -29,7 +15,7 @@ async function loadProducts() {
     return await response.json();
 }
 
-const list = document.querySelector('#list');
+
 
 function render(products) {
     list.innerHTML = '';
@@ -41,7 +27,7 @@ function render(products) {
     }
 }
 
-const errorBox = document.querySelector('#error');
+
 
 async function refresh() {
     try {
@@ -53,5 +39,6 @@ async function refresh() {
         errorBox.textContent = `Не вдалось завантажити: ${err.message}`;
     }
 }
+
 
 refresh();

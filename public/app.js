@@ -2,7 +2,7 @@
 
 const errorBox = document.querySelector('#error');
 const list = document.querySelector('#list');
-
+const form = document.querySelector('#form')
 
 async function loadProducts() {
 
@@ -40,5 +40,14 @@ async function refresh() {
     }
 }
 
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const data = new FormData(form);
+    const title = data.get('title');
+    const price = Number(data.get('price'));
+
+    console.log({ title, price });
+});
 
 refresh();

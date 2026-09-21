@@ -47,7 +47,27 @@ form.addEventListener('submit', async (e) => {
     const title = data.get('title');
     const price = Number(data.get('price'));
 
-    console.log({ title, price });
+    try {
+        errorBox.textContent = '';
+
+        const res = await fetch('/api/products', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title, price }),
+        });
+
+        if (!res.ok) {
+            const body = await res.json();
+            errorBox.textContent = body.error;
+            return;
+        }
+
+        form.reset();
+        await refresh();
+    } catch (err) {
+        errorBox.textContent = err.message;
+    }
+    
 });
 
 refresh();
